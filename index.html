@@ -13,21 +13,29 @@
 
     <script>
         async function subscribe() {
-            let sw = await navigator.serviceWorker.ready;
+            try {
+                const sw = await navigator.serviceWorker.ready;
 
-            let push = await sw.pushManager.subscribe({
-                userVisibleOnly: true,
-                applicationServerKey: 'BAWwzaQSWnr902LMsGhy9RIsCDOA2X1t2AJ1qjU0vtDAQCsu_oKGuLtE-vOxl4y1sfP1BNwTIQVnoXBCFPdTAHo'
-            });
+                const push = await sw.pushManager.subscribe({
+                    userVisibleOnly: true,
+                    applicationServerKey: 'BAWwzaQSWnr902LMsGhy9RIsCDOA2X1t2AJ1qjU0vtDAQCsu_oKGuLtE-vOxl4y1sfP1BNwTIQVnoXBCFPdTAHo'
+                });
 
-            console.log(JSON.stringify(push));
+                console.log(JSON.stringify(push));
+            } catch (error) {
+                console.log(error.message);
+            }
         }
 
         if('serviceWorker' in navigator) {
             addEventListener('load', async () => {
-                let sw = await navigator.serviceWorker.register('./sw.js');
+                try {
+                    const sw = await navigator.serviceWorker.register('./sw.js');
 
-                console.log(sw);
+                    console.log(sw);
+                } catch (error) {
+                    console.log(error.message);
+                }
             });
         }
 
