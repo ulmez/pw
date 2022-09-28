@@ -21,7 +21,10 @@
             let sw = await navigator.serviceWorker.ready;
             let subscription = await sw.pushManager.getSubscription();
 
-            await subscription.unsubscribe();
+            const result = await subscription.unsubscribe();
+
+            console.log(result);
+
             // await sw.pushManager.unsubscribe();
             // await navigator.serviceWorker.unsubscribe();
         }
