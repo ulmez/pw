@@ -18,7 +18,8 @@
         });
 
         async function unsubscribe() {
-            await sw.pushManager.unsubscribe();
+            // await sw.pushManager.unsubscribe();
+            await navigator.serviceWorker.unsubscribe();
         }
 
         async function subscribe() {
