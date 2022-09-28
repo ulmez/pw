@@ -8,6 +8,7 @@
 </head>
 <body>
     
+    <button onClick="unsubscribe()">Unsubscribe</button>
     <button onClick="subscribe()">Subscribe</button>
 
     <script>
@@ -17,6 +18,10 @@
             sw = await navigator.serviceWorker.register('./sw.js');
             console.log(sw);
         });
+
+        async function unsubscribe() {
+            await sw.pushManager.unsubscribe();
+        }
 
         async function subscribe() {
             sw = await navigator.serviceWorker.ready;
