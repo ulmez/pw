@@ -8,33 +8,13 @@
 </head>
 <body>
     
-    <button onClick="unsubscribe()">Unsubscribe</button>
+    <!-- <button onClick="unsubscribe()">Unsubscribe</button> -->
     <button onClick="subscribe()">Subscribe</button>
 
     <script>
-        addEventListener('load', async () => {
-            let sw = await navigator.serviceWorker.register('./sw.js');
-            console.log(sw);
-        });
-
-        async function unsubscribe() {
-            let sw = await navigator.serviceWorker.ready;
-            let subscription = await sw.pushManager.getSubscription();
-
-            try {
-                await subscription.unsubscribe();
-
-                console.log('Successfully unsubscribed!');
-            } catch (error) {
-                console.log(error.message);
-            }
-
-            // await sw.pushManager.unsubscribe();
-            // await navigator.serviceWorker.unsubscribe();
-        }
-
         async function subscribe() {
             let sw = await navigator.serviceWorker.ready;
+
             let push = await sw.pushManager.subscribe({
                 userVisibleOnly: true,
                 applicationServerKey: 'BAWwzaQSWnr902LMsGhy9RIsCDOA2X1t2AJ1qjU0vtDAQCsu_oKGuLtE-vOxl4y1sfP1BNwTIQVnoXBCFPdTAHo'
@@ -42,6 +22,50 @@
 
             console.log(JSON.stringify(push));
         }
+
+        if('serviceWorker' in navigator) {
+            addEventListener('load', async () => {
+                let sw = await navigator.serviceWorker.register('./sw.js');
+
+                console.log(sw);
+            });
+        }
+
+
+
+
+
+
+        // addEventListener('load', async () => {
+        //     let sw = await navigator.serviceWorker.register('./sw.js');
+        //     console.log(sw);
+        // });
+
+        // async function unsubscribe() {
+        //     let sw = await navigator.serviceWorker.ready;
+        //     let subscription = await sw.pushManager.getSubscription();
+
+        //     try {
+        //         await subscription.unsubscribe();
+
+        //         console.log('Successfully unsubscribed!');
+        //     } catch (error) {
+        //         console.log(error.message);
+        //     }
+
+        //     // await sw.pushManager.unsubscribe();
+        //     // await navigator.serviceWorker.unsubscribe();
+        // }
+
+        // async function subscribe() {
+        //     let sw = await navigator.serviceWorker.ready;
+        //     let push = await sw.pushManager.subscribe({
+        //         userVisibleOnly: true,
+        //         applicationServerKey: 'BAWwzaQSWnr902LMsGhy9RIsCDOA2X1t2AJ1qjU0vtDAQCsu_oKGuLtE-vOxl4y1sfP1BNwTIQVnoXBCFPdTAHo'
+        //     });
+
+        //     console.log(JSON.stringify(push));
+        // }
     </script>
 </body>
 </html>
