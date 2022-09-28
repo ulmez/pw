@@ -11,13 +11,15 @@
     <button onClick="subscribe()">Subscribe</button>
 
     <script>
+        let sw = null;
+
         addEventListener('load', async () => {
-            let sw = await navigator.serviceWorker.register('./sw.js');
+            sw = await navigator.serviceWorker.register('./sw.js');
             console.log(sw);
         });
 
         async function subscribe() {
-            let sw = await navigator.serviceWorker.ready;
+            sw = await navigator.serviceWorker.ready;
             let push = await sw.pushManager.subscribe({
                 userVisibleOnly: true,
                 applicationServerKey: 'BHFVGLmr49ucXSO-nRj1xwSYkUz1H6GyNBzlY4HEvfZOi6_u0uZ76B06JRcuARGa-8KPZmuCFps5dpzjjDI5jdY'
